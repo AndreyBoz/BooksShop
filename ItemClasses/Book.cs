@@ -15,10 +15,10 @@ namespace BooksShop.ItemClasses
         private int countPage;
         private decimal price;
         private decimal margin;
-        private int rating =0;
+        private int rating = 0;
         private int count;
 
-        protected Book(string author, string name, string publisher, int year, int countPage, decimal price, decimal margin,int count)
+        protected Book(string author, string name, string publisher, int year, int countPage, decimal price, decimal margin, int count)
         {
             this.author = author;
             this.name = name;
@@ -36,7 +36,7 @@ namespace BooksShop.ItemClasses
         public int getYear() { return year; }
         public override string ToString()
         {
-            return "Name book: "+name+" Price: "+price;
+            return "Name book: " + name + " Price: " + price;
         }
         public void setPrice(decimal price) { this.price = price; }
         public decimal getPrice() { return price; }

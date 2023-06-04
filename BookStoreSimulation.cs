@@ -11,7 +11,7 @@ namespace BooksShop
     class BookStoreSimulation
     {
         private List<Book> books = new List<Book>();
-        private List<Book> orderToPublisher = new List<Book>();
+        private HashSet<Book> orderToPublisher = new HashSet<Book>();
         private List<Order> allCompletedOrders = new List<Order>(); // выполненные магазином заказы
         private List<Book> booksSold = new List<Book>();
         private List<Book> allOrders = new List<Book>(); // все заказы книг  (обработанные и не обработанные)
@@ -48,20 +48,42 @@ namespace BooksShop
 
         public void RunSimulation()
         {
-            for (int i = 1; i <= simulationDays; i++) {
-                GenerateBookOrders();
+            List<Order> Orders = new List<Order>();
+            List<Book> booksOrderbyPublisherInDay = new List<Book>();
+            for (int i = 1; i <= simulationDays; i++)
+            {
+                Orders = GenerateBookOrders();
                 int totalBookCount = books.Sum(book => book.getCount());
                 int uniqueBooksCount = books.Select(book => book.getCount()).Distinct().Count();
-                coefficientDeliver = (totalBookCount / uniqueBooksCount >= 0.5 ? 2 : 1);
-                if (i % deliveryDays == 0) { // так же каждые 3 дня мы убираем наценку на новые книги
-                    foreach (var book in books) {
-                        if (book.getMargin() == newBookMarkupPercentage) {
+                coefficientDeliver = (totalBookCount / uniqueBooksCount >= 0.5 ? 2 : 1); // коэффициент плотности заказов
+                if (i % deliveryDays == 0)
+                { // так же каждые 3 дня мы убираем наценку на новые книги
+                    foreach (var book in books)
+                    {
+                        if (book.getMargin() == newBookMarkupPercentage)
+                        {
                             book.setPrice(book.getPrice() / newBookMarkupPercentage);
                             book.setMargin(retailMarkupPercentage);
                         }
                     }
-                    OrderDelivery(); // каждый период доставки, который пользователь задал, доставляются новые книги
+                    booksOrderbyPublisherInDay = OrderDelivery(); // каждый период доставки, который пользователь задал, доставляются новые книги
                 }
+                Console.WriteLine($"|||||||||||||||||||||||||||||||||||{i} Day|||||||||||||||||||||||||||||||||||||||");
+                Console.WriteLine($"Completed orders in {i} days: " + Orders.Count);
+                if (i % 5 == 0)
+                {
+                    Console.WriteLine($"Completed orders in {i} days by publisher: " + booksOrderbyPublisherInDay.Count);
+                    Console.WriteLine("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+                }
+                Console.WriteLine($"Completed orders in {i} days: ");
+                Orders.ForEach(order => Console.WriteLine(order));
+                if (i % 5 == 0)
+                {
+                    Console.WriteLine($"Completed orders in {i} days by publisher: ");
+                    booksOrderbyPublisherInDay.ForEach(book => Console.WriteLine(book + " Count: " + book.getCount()));
+                }
+                Console.WriteLine("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+
             }
             SaveStaff();
         }
@@ -110,8 +132,9 @@ namespace BooksShop
                 }
             }
         }
-        private void GenerateBookOrders()
+        private List<Order> GenerateBookOrders()
         {
+            List<Order> orders = new List<Order>();
             Order order = null;
             for (int i = 0; i < 5 * coefficientDeliver; i++)
             {
@@ -127,8 +150,12 @@ namespace BooksShop
                         order = GenerateEmailOrder();
                         break;
                 }
+                if (order.getOrderItemCount() == 0)
+                    continue;
                 allCompletedOrders.Add(order);
+                orders.Add(order);
             }
+            return orders;
         }
         private Order GenerateBookStoreOrder() {
             Order order = new Order("Customer " + random.Next(1, 100), null, null);
@@ -153,25 +180,29 @@ namespace BooksShop
             book.setCount(book.getCount() - countBook); // если больше, просто отнимаем от количества
             book.setRating(book.getRating() + 1); // увеличиваем рейтинг книг при каждом заказе
         }
-        private void OrderDelivery() {
+        private List<Book> OrderDelivery() {
+            List<Book> result = new List<Book>();
             foreach (Book book in orderToPublisher)
             {
                 // Проверяем, существует ли книга в списке books
                 Book existingBook = books.Find(b => b.Equals(book));
 
-                completedOrdersByPublisher.Add(existingBook); // записываем выполненный издательствами заказы
-
                 if (existingBook != null)
                 {
                     // Книга уже существует в списке books, увеличиваем значение count с помощью setCount
-                    existingBook.setCount(existingBook.getCount() + book.getCount());
+                    existingBook.setCount(existingBook.getCount() + 15);
                 }
                 else
                 {
                     // Книги не существует в списке books, добавляем ее
-                    books.Add(book);
+                    books.Add(book); 
                 }
+                
+                result.Add(book);
             }
+            completedOrdersByPublisher.AddRange(result);
+            orderToPublisher = new HashSet<Book>();
+            return result;
         }
         private List<OrderItem> GenerateBook() { // генерируем случаную книгу
             List<OrderItem> result = new List<OrderItem>();

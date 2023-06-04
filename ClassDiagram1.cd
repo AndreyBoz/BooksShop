@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="BooksShop.ItemClasses.ArtisticLiterature">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ItemClasses\ArtisticLiterature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BooksShop.ItemClasses.Book">
+    <Position X="3.5" Y="3.75" Width="7" />
+    <TypeIdentifier>
+      <HashCode>AAAFAAAAAAEQAAAUBAABAZgAAQBEIAAAAAAAQAQEAAA=</HashCode>
+      <FileName>ItemClasses\Book.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BooksShop.ItemClasses.ChildrenBook">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ItemClasses\ChildrenBook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BooksShop.ItemClasses.ForeignLiterature">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>ItemClasses\ForeignLiterature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BooksShop.ItemClasses.Manual">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>ItemClasses\Manual.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BooksShop.ItemClasses.OrderItem">
+    <Position X="13.75" Y="3.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAIAAEgAAAAAQgAAAAAAAAAAAAAAAAQEA=</HashCode>
+      <FileName>ItemClasses\Order.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BooksShop.ItemClasses.Order">
+    <Position X="13.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAABAAAAAAAMAAAAQgAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ItemClasses\Order.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BooksShop.ItemClasses.ScientificLiterature">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAABAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ItemClasses\ScientificLiterature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BooksShop.BookStoreSimulation">
+    <Position X="11.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>gBAACAQEEEEIABEAAALMAIACgAAAAAQAQAQQQAABAII=</HashCode>
+      <FileName>BookStoreSimulation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -41,6 +41,9 @@ namespace BooksShop.ItemClasses
         public void setOrdersItems(List<OrderItem> orderItems) {
             this.Books = orderItems;
         }
+        public int getOrderItemCount() {
+            return Books.Count;
+        }
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
